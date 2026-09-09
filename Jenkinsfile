@@ -48,18 +48,17 @@ pipeline {
                 sh "docker push ${DOCKER_USER}/${IMAGE_NAME}:${IMAGE_TAG}"
                 sh "docker push ${DOCKER_USER}?${IMAGE_NAME}:latest"
             }
+        }   
+    }
+    post {
+        always {
+            sh 'docker logout || true'
         }
-}
-
-post {
-    always {
-        sh 'docker logout || true'
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed. check stage logs.'
+        }
     }
-    success {
-        echo 'pipeline completed successfully!'
-    }
-    failure {
-        echo 'pipeline failed. check stage logs.'
-    }
-}
-}
+}        
