@@ -36,7 +36,7 @@ pipeline {
             steps {
                 echo 'Packaging Docker image...'
                 sh "docker build -t ${DOCKER_USER}/${IMAGE_NAME}:${IMAGE_TAG} ."
-                sh "docker tag ${DOCKER_USER}/${IMAGE_NAME}:${IMAGE_TAG}:${DOCKER_USER}/${IMAGE_NAME}:latest"
+                sh "docker tag ${DOCKER_USER}/${IMAGE_NAME}:${IMAGE_TAG} ${DOCKER_USER}/${IMAGE_NAME}:latest"
             }
         }
 
