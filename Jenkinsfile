@@ -36,7 +36,7 @@ pipeline {
             steps {
                 echo 'Packaging Docker image...'
                 sh "docker build -t ${DOCKER_USER}/${IMAGE_NAME}:${IMAGE_TAG} ."
-                sh "docker tag ${DOCKER_USER}/${IMAGE_NAME}:${IMAGE_TAG} ${DOCKER_USER}/${IMAGE_NAME}:latest"
+                sh "docker tag ${DOCKER_USER}/${IMAGE_NAME}:${IMAGE_TAG}:${DOCKER_USER}/${IMAGE_NAME}:latest"
             }
         }
 
@@ -45,7 +45,7 @@ pipeline {
                 echo 'Pushing Doxkerimage to docker Hub...'
                 sh 'echo "$DOCKER_CREDS_PSW" | docker login -u "$DOCKER_CREDS_USR" --password-stdin'
                 sh "docker push ${DOCKER_USER}/${IMAGE_NAME}:${IMAGE_TAG}"
-                sh "docker push ${DOCKER_USER}${IMAGE_NAME}:latest"
+                sh "docker push ${DOCKER_USER}/${IMAGE_NAME}:latest"
             }
         }   
     }
