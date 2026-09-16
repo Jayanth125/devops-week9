@@ -1,14 +1,13 @@
-FROM node:lts-alpine
+FROM node:20-alpine
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
-COPY package.json ./
-COPY index.js ./
+COPY package*.json ./
 
-# Update npm and bundled packages
-RUN npm install -g npm@latest
+RUN npm ci --omit=dev
 
-# Create non-root user
+COPY . .
+
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
 USER appuser
